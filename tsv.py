@@ -34,12 +34,13 @@ class Row:
 class TSV:
    ''' Default setting assumes the file is tab-delimited '''
    def __init__(self, filename, token='\t'):
-      self.lines = open(filename, 'rU').readlines()
-      self.reset()
+      with open(filename, 'rU') as f:
+         self.lines = f.readlines()
       h = self.lines.pop(0).strip()
       while not h:
          h = self.lines.pop(0).strip()
       self.row = Row(h, token)
+      self.reset()
 
    def reset(self):
       self.i = -1
@@ -62,7 +63,7 @@ class TSV:
 #-----------------------------------------------------------------------------
 
 if __name__ == '__main__':
-   rows = TSV("customer.txt")
+   rows = TSV("customer17.txt")
    for i, r in enumerate(rows):
       print i, r['FIRSTNAME'], r['LASTNAME'], r['COMPANY']
 
