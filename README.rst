@@ -6,7 +6,7 @@ Input:
    + Subsequent rows have tab-delimited fields, consistent with the header.
 
 
-.. code-block:: pycon
+.. code-block:: python
 
 	rows = TSV("customer.txt", '\t')
 	for r in rows:
