@@ -1,8 +1,4 @@
-------------------------------------------
-TSV: parser of token-separated-value files
-------------------------------------------
-
-Parsing token-separated-values (tsv) files.
+Parsing token-separated-values (tsv) files with fields specified in headers.
 Token is a tab by default, but configurable to others, e.g. comma or semicolon.
 
 Input:
