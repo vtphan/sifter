@@ -34,7 +34,7 @@ class Row:
 class TSV:
    ''' Default setting assumes the file is tab-delimited '''
    def __init__(self, filename, token='\t'):
-      self.lines = open(filename).readlines()
+      self.lines = open(filename, 'rU').readlines()
       self.reset()
       self.row = Row(self.lines.pop(0), token)
 
