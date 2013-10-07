@@ -40,12 +40,9 @@ class TSV:
       while not h:
          h = self.lines.pop(0).strip()
       self.row = Row(h, token)
-      self.reset()
-
-   def reset(self):
-      self.i = -1
 
    def __iter__(self):
+      self.i = -1
       return self
 
    def next(self):
@@ -63,7 +60,6 @@ class TSV:
 #-----------------------------------------------------------------------------
 
 if __name__ == '__main__':
-   rows = TSV("customer17.txt")
+   rows = TSV("customer.txt")
    for i, r in enumerate(rows):
       print i, r['FIRSTNAME'], r['LASTNAME'], r['COMPANY']
-
