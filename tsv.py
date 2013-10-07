@@ -7,7 +7,7 @@ Input:
    + Subsequent rows have tab-delimited fields, consistent with the header.
 
 Example:
-   rows = TSV("Customers2.txt", '\t')
+   rows = TSV("customer.txt", '\t')
    for r in rows:
       print r['FIRSTNAME'], r['LASTNAME'], r['COMPANY']
 '''
@@ -17,13 +17,13 @@ class Row:
    def __init__(self, header, token):
       self.token = token
       self.fields = {}
-      for idx, t in enumerate(header.strip().split(token)):
+      for idx, t in enumerate(header.split(token)):
          if t not in self.fields:
             self.fields[t] = idx
       self.r = None
 
    def set(self, line):
-      self.r = line.strip("\n").split(self.token)
+      self.r = line.split(self.token)
       if len(self.r) != len(self.fields):
          raise Exception("Header and row have different lengths.")
 
@@ -36,7 +36,10 @@ class TSV:
    def __init__(self, filename, token='\t'):
       self.lines = open(filename, 'rU').readlines()
       self.reset()
-      self.row = Row(self.lines.pop(0), token)
+      h = self.lines.pop(0).strip()
+      while not h:
+         h = self.lines.pop(0).strip()
+      self.row = Row(h, token)
 
    def reset(self):
       self.i = -1
@@ -47,15 +50,19 @@ class TSV:
    def next(self):
       if self.i < len(self.lines)-1:
          self.i += 1
-         self.row.set(self.lines[self.i])
-         return self.row
+         line = self.lines[self.i].strip("\n")
+         if line:
+            self.row.set(line)
+            return self.row
+         else:
+            return self.next()
       else:
          raise StopIteration
 
 #-----------------------------------------------------------------------------
 
 if __name__ == '__main__':
-   rows = TSV("Customers2.txt")
-   for r in rows:
-      print r['FIRSTNAME'], r['LASTNAME'], r['COMPANY']
+   rows = TSV("customer17.txt")
+   for i, r in enumerate(rows):
+      print i, r['FIRSTNAME'], r['LASTNAME'], r['COMPANY']
 
