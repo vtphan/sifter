@@ -62,7 +62,7 @@ class TSV:
 #-----------------------------------------------------------------------------
 
 if __name__ == '__main__':
-   rows = TSV("customer17.txt")
+   rows = TSV("customer.txt")
    for i, r in enumerate(rows):
       print i, r['FIRSTNAME'], r['LASTNAME'], r['COMPANY']
 
