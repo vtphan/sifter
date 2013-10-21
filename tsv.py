@@ -7,7 +7,8 @@ Input:
    + Subsequent rows have tab-delimited fields, consistent with the header.
 
 Example:
-   rows = TSV("customer.txt", '\t')
+   import tsv
+   rows = tsv.Read("customer.txt", '\t')
    for r in rows:
       print r['FIRSTNAME'], r['LASTNAME'], r['COMPANY']
 '''
@@ -31,7 +32,7 @@ class Row:
       return self.r[self.fields[key]] if self.r else None
 
 #-----------------------------------------------------------------------------
-class TSV:
+class Read:
    ''' Default setting assumes the file is tab-delimited '''
    def __init__(self, filename, token='\t'):
       with open(filename, 'rU') as f:
@@ -60,6 +61,6 @@ class TSV:
 #-----------------------------------------------------------------------------
 
 if __name__ == '__main__':
-   rows = TSV("customer.txt")
+   rows = Read("customer.txt")
    for i, r in enumerate(rows):
       print i, r['FIRSTNAME'], r['LASTNAME'], r['COMPANY']

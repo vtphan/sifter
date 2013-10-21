@@ -7,8 +7,9 @@ Input:
 
 
 .. code-block:: python
-
-	rows = TSV("customer.txt", '\t')
+	
+	import tsv
+	rows = tsv.Read("customer.txt", '\t')
 	for r in rows:
 		print r['FIRSTNAME'], r['LASTNAME'], r['COMPANY']
 
