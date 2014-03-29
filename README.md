@@ -10,7 +10,7 @@ Input:
 ```
 	import reader
    	data = Read("data.txt", "\t")	# default separator is '\t', but user-specifiable
-   	print data['D12']  		# each column is a list
+   	print data['D12']		# each column is a list
 	print data['D50']	
    	print data['AE017198.fasta']	# each row is also a list
 ```
