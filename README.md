@@ -9,8 +9,8 @@ Input:
 
 ```
 	import reader
-   	data = Read("data.txt", "\t")	# default separator is '\t', but user-specifiable
-   	print data['D12']			# each column is a list
+   	data = Read("data.txt", "\t")     # Default separator is '\t', but user-specifiable
+   	print data['D12']                 # Each column is a list
 	print data['D50']	
-   	print data['AE017198.fasta']	# each row is also a list
+   	print data['AE017198.fasta']      # Each row is also a list
 ```
