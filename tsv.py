@@ -18,18 +18,28 @@ class Row:
    def __init__(self, header, token):
       self.token = token
       self.fields = {}
-      for idx, t in enumerate(header.split(token)):
+      h = header.split(token)
+      self.columns = len(h)
+      for idx, t in enumerate(h):
          if t not in self.fields:
             self.fields[t] = idx
       self.r = None
 
    def set(self, line):
       self.r = line.split(self.token)
-      if len(self.r) != len(self.fields):
-         raise Exception("Header and row have different lengths.")
+      if len(self.r) != self.columns:
+         print "Error: column mismatch (%d != %d): %s" % (self.columns, len(self.r), self.r)
+      # Certain columns might duplicate.
+      # if len(self.r) != len(self.fields):
+      #    print "Error:\n",self.r,"\n",self.fields
+      #    raise Exception("Header and row have different lengths: %d != %d" % (len(self.r),len(self.fields)))
 
    def __getitem__(self, key):
-      return self.r[self.fields[key]] if self.r else None
+      if self.r:
+         return self.r[self.fields[key]]
+      return None
+      # return self.r[self.fields[key]] if self.r else None
+
 
 #-----------------------------------------------------------------------------
 class Read:
@@ -42,6 +52,12 @@ class Read:
          h = self.lines.pop(0).strip()
       self.row = Row(h, token)
 
+   def __contains__(self, key):
+      return key in self.row.fields
+
+   def __len__(self):
+      return len(self.lines)
+
    def __iter__(self):
       self.i = -1
       return self
@@ -50,7 +66,7 @@ class Read:
       if self.i < len(self.lines)-1:
          self.i += 1
          line = self.lines[self.i].strip("\n")
-         if line:
+         if line and line[0]!='#':  # ignore empty lines and commented lines (start with #)
             self.row.set(line)
             return self.row
          else:
@@ -61,6 +77,22 @@ class Read:
 #-----------------------------------------------------------------------------
 
 if __name__ == '__main__':
-   rows = Read("customer.txt")
+   print "Product"
+   pids = set()
+   rows = Read("product17.txt")
+   c = 0
    for i, r in enumerate(rows):
-      print i, r['FIRSTNAME'], r['LASTNAME'], r['COMPANY']
+      # print i, r['PRODUCT_ID'], r['RETAIL'], r['COST'], r['VENDOR']
+      pids.add(r['PRODUCT_ID'])
+      c += 1
+
+   print "Stock"
+   rows = Read("StockNo17.txt")
+   a, b = 0, 0
+   for i, r in enumerate(rows):
+      b += 1
+      if r['PRODUCTNUMBER'] not in pids:
+         a += 1
+         print r['PRODUCTNUMBER']
+
+   print len(rows)
