@@ -39,7 +39,7 @@ class Read:
 #-----------------------------------------------------------------------------
 
 if __name__ == '__main__':
-   data = Read("customer.txt", "\t") #, [str, str, str, str])
+   data = Read("customer.txt", "\t")
    print data.keys
    print data['COMPANY']
    print data['FIRSTNAME']
