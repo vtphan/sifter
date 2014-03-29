@@ -29,10 +29,6 @@ class Row:
       self.r = line.split(self.token)
       if len(self.r) != self.columns:
          print "Error: column mismatch (%d != %d): %s" % (self.columns, len(self.r), self.r)
-      # Certain columns might duplicate.
-      # if len(self.r) != len(self.fields):
-      #    print "Error:\n",self.r,"\n",self.fields
-      #    raise Exception("Header and row have different lengths: %d != %d" % (len(self.r),len(self.fields)))
 
    def __getitem__(self, key):
       if self.r:
@@ -77,22 +73,7 @@ class Read:
 #-----------------------------------------------------------------------------
 
 if __name__ == '__main__':
-   print "Product"
-   pids = set()
-   rows = Read("product17.txt")
-   c = 0
-   for i, r in enumerate(rows):
-      # print i, r['PRODUCT_ID'], r['RETAIL'], r['COST'], r['VENDOR']
-      pids.add(r['PRODUCT_ID'])
-      c += 1
+   rows = Read("customer.txt")
+   for r in rows:
+      print r['FIRSTNAME'], r['LASTNAME'], r['COMPANY'], r['CITY']
 
-   print "Stock"
-   rows = Read("StockNo17.txt")
-   a, b = 0, 0
-   for i, r in enumerate(rows):
-      b += 1
-      if r['PRODUCTNUMBER'] not in pids:
-         a += 1
-         print r['PRODUCTNUMBER']
-
-   print len(rows)
