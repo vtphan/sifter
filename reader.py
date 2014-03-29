@@ -1,3 +1,7 @@
+'''
+Author: Vinhthuy Phan, 2014
+'''
+
 class Read:
    def __init__(self, filename, sep="\t"):
       with open(filename, 'rU') as f:
