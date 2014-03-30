@@ -7,15 +7,12 @@ Token is a tab by default, but configurable to others, e.g. comma or semicolon.
 	# read a tab-separate file.
 	data = read("data.txt")   
 
-	# read a comma-separated file, skip 5 lines in the beginning of file
-	data = read("data.txt", sep=',', skip_header=5)   
+	print data['D12']	# This is the list of data in column 'D12'.
+	print [row['D12'] for row in data]   # same as above
 
-	# iterate through rows to get column 'D12'
-	print [row['D12'] for row in data]
+	data = read("data.txt", sep=',', skip_header=5)   # Read a comma-separated file, skip 5 lines in the beginning of file
+
 	
-	# same as above, but more concise.  data['D12'] is a list containing column 'D12'.
-	print data['D12']
-
 	# first column stores row keys, some of which can be filtered out (ignored)
 	filtered_data = data.ignore('NT_167185.1.fasta','NT_167196.1.fasta')
 	print filtered_data['D12']
