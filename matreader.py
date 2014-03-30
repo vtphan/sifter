@@ -7,6 +7,9 @@ class Row:
    def __init__(self, keys, values, sep):
       ks = [ i.strip() for i in keys.split(sep) ]
       vs = [ i.strip() for i in values.split(sep) ]
+      if len(ks) != len(vs):
+         raise Exception("Discrepancies in keys and values:\n%s\n%s\n" % (keys, values))
+
       self.data = {}
       for i, k in enumerate(ks):
          try:
