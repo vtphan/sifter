@@ -10,15 +10,15 @@ Token is a tab by default, but configurable to others, e.g. comma or semicolon.
 	# read a comma-separated file, skip 5 lines in the beginning of file
 	data = read("data.txt", sep=',', skip_header=5)   
 
-	# iterate through rows
+	# iterate through rows to get column 'D12'
 	print [row['D12'] for row in data]
-	print [row['D12'] for ror in data.ignore('NT_167185.1.fasta', 'NT_167196.1.fasta')]
 	
 	# same as above, but more concise
 	print data['D12']
 
 	# first column stores row keys, some of which can be filtered out (ignored)
-	print data.ignore('NT_167185.1.fasta','NT_167196.1.fasta')['D12']
+	filtered_data = data.ignore('NT_167185.1.fasta','NT_167196.1.fasta')
+	print filtered_data['D12']
 ```
 
 #### reader.py:
