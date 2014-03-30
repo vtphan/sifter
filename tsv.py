@@ -1,6 +1,5 @@
 '''
 Author: Vinhthuy Phan
-Deprecated: use reader.py instead
 
 Parsing token-separated-values (tsv) files.
 Token is a tab by default, but configurable to others, e.g. comma or semicolon.
@@ -18,26 +17,31 @@ Example:
 
 #-----------------------------------------------------------------------------
 class Row:
-   def __init__(self, header, token):
-      self.token = token
+   def __init__(self, header, sep):
+      self.sep = sep
       self.fields = {}
-      h = header.split(token)
+      h = header.split(sep)
       self.columns = len(h)
-      for idx, t in enumerate(h):
-         if t not in self.fields:
-            self.fields[t] = idx
+      for idx, key in enumerate(h):
+         if key not in self.fields:
+            self.fields[key] = idx
       self.r = None
 
    def set(self, line):
-      self.r = line.split(self.token)
+      self.r = line.split(self.sep)
       if len(self.r) != self.columns:
          print "Error: column mismatch (%d != %d): %s" % (self.columns, len(self.r), self.r)
 
    def __getitem__(self, key):
       if self.r:
-         return self.r[self.fields[key]]
+         v = self.r[self.fields[key]]
+         try:
+            v = float(v)
+         except:
+            pass
+         return v
+
       return None
-      # return self.r[self.fields[key]] if self.r else None
 
 
 #-----------------------------------------------------------------------------
@@ -76,7 +80,6 @@ class Read:
 #-----------------------------------------------------------------------------
 
 if __name__ == '__main__':
-   rows = Read("customer.txt")
-   for r in rows:
-      print r['FIRSTNAME'], r['LASTNAME'], r['COMPANY'], r['CITY']
+   rows = Read("complexity.txt")
+   print [r['D12'] for r in rows]
 

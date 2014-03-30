@@ -9,10 +9,10 @@ class Read:
          self.lines = [ line.rstrip() for line in f.readlines() if line.strip() and (line.strip()[0] != '#')]
 
       self.col_keys = []
-      self.col_data = {}
+      # self.col_data = {}
       self.row_keys = []
       self.row_data = {}
-      self.cols = 0
+      self.col_num = 0
 
       if self.lines:
          # Process first line
@@ -22,14 +22,14 @@ class Read:
          self.row_keys = [ self.col_keys[0] ]
          self.row_data = { self.row_keys[0] : self.col_keys[1:] }
 
-         self.col_data = { k : [] for k in self.col_keys }
+         # self.col_data = { k : [] for k in self.col_keys }
 
          # Process lines starting from the second line
          for line in self.lines:
             values = [ v.strip() for v in line.split(sep) ]
 
-            if len(values) != self.cols:
-               raise Exception("Missing values", len(values), self.cols, line)
+            if len(values) != self.col_num:
+               raise Exception("Missing values", len(values), self.col_num, line)
 
             for i,v in enumerate(values):
                if not v:
@@ -40,7 +40,7 @@ class Read:
                except:
                   pass
 
-               self.col_data[ self.col_keys[i] ].append( v )
+               # self.col_data[ self.col_keys[i] ].append( v )
 
                if i == 0:
                   self.row_keys.append(v)
