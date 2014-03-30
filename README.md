@@ -4,9 +4,15 @@ Token is a tab by default, but configurable to others, e.g. comma or semicolon.
 #### matreader.py:
 
 ```
-	rows = read("complexity.txt")
-	print [r['D12'] for r in rows]
-	print [r['D12'] for r in rows.ignore('NT_167185.1.fasta', 'NT_167196.1.fasta', 'NT_077528.2.fasta')]
+	data = read("complexity.txt", '\t')   # default is '\t', but user specifiable
+
+	# iterate through rows
+	print [row['D12'] for row in data]
+	print [row['D12'] for ror in data.ignore('NT_167185.1.fasta', 'NT_167196.1.fasta')]
+	
+	# same as above, but more concise
+	print data['D12']
+	print data.ignore('NT_167185.1.fasta','NT_167196.1.fasta')['D12']
 ```
 
 #### reader.py:
