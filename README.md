@@ -4,9 +4,11 @@ Token is a tab by default, but configurable to others, e.g. comma or semicolon.
 #### matreader.py:
 
 ```
-	# read a delimited text file separated by "sep", and ignore number of lines in header.
+	# read a delimited text file, default delimiter is tab
 	data = read("data.txt")   
-	data = read("data.txt", sep='\t', skip_header=0)   
+
+	# read a comma-separated file, skip 5 lines in the beginning of file
+	data = read("data.txt", sep=',', skip_header=5)   
 
 	# iterate through rows
 	print [row['D12'] for row in data]
