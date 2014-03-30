@@ -5,6 +5,7 @@ Token is a tab by default, but configurable to others, e.g. comma or semicolon.
 
 ```
 	# read a delimited text file separated by "sep", and ignore number of lines in header.
+	data = read("data.txt")   
 	data = read("data.txt", sep='\t', skip_header=0)   
 
 	# iterate through rows
