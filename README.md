@@ -4,7 +4,7 @@ Token is a tab by default, but configurable to others, e.g. comma or semicolon.
 #### matreader.py:
 
 ```
-	data = read("complexity.txt", '\t')   # default is '\t', but user specifiable
+	data = read("data.txt", '\t')   # default is '\t', but user specifiable
 
 	# iterate through rows
 	print [row['D12'] for row in data]
