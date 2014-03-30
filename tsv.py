@@ -1,5 +1,6 @@
 '''
 Author: Vinhthuy Phan
+Deprecated: use matreader.py instead
 
 Parsing token-separated-values (tsv) files.
 Token is a tab by default, but configurable to others, e.g. comma or semicolon.
