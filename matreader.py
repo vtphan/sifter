@@ -22,7 +22,6 @@ class Row:
 
 #-----------------------------------------------------------------------------
 class Rows:
-   ''' Default setting assumes the file is tab-delimited '''
    def __init__(self, header, lines, sep):
       self.rows = [ Row(header, line, sep) for line in lines ]
       self.keys = [ line.split(sep)[0].strip() for line in lines ]
@@ -59,10 +58,13 @@ class Rows:
 
 #-----------------------------------------------------------------------------
 
-def read(filename, sep='\t'):
+def read(filename, sep='\t', skip_header=0):
+   ''' Default setting assumes the file is tab-delimited '''
    with open(filename, 'rU') as f:
-      # remove all empty and comments (starting with #) in data
-      lines = [ line.strip() for line in f.readlines() if line.strip() and (line.strip()[0] != '#')]
+      lines = [ line.strip() for line in f.readlines() ]
+      lines = lines[skip_header : ]
+      # remove empty lines and comments (lines starting with #) in data
+      lines = [ line for line in lines if line and line[0]!='#']
 
    header = lines.pop(0).strip()
    return Rows(header, lines, sep)
@@ -70,9 +72,7 @@ def read(filename, sep='\t'):
 #-----------------------------------------------------------------------------
 
 if __name__ == '__main__':
-   data = read("complexity.txt")
-   # print [r['D12'] for r in data.ignore('NT_167185.1.fasta', 'NT_167196.1.fasta', 'NT_077528.2.fasta')]
-   # print [r['ID'] for r in data]
+   data = read("data.txt")
    print data['D12']
    print data.ignore('NT_167185.1.fasta','NT_167196.1.fasta')['D12']
-
+   # print data['ID']
