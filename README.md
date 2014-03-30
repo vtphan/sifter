@@ -15,14 +15,14 @@ Token is a tab by default, but configurable to others, e.g. comma or semicolon.
 	print filtered_data['D12']
 	
 	# More general ways of filter
-	# All values in column D12
-	data = [r['D12'] for r in data]
+	# All values in column D12, same as data['D12']
+	result = [r['D12'] for r in data]
 
 	# Values in column D12 for rows with specific values in ID
-	data = [r['D12'] for r in data if r['ID'] in ('NT_167185.1.fasta','NT_167196.1.fasta')]
+	result = [r['D12'] for r in data if r['ID'] in ('NT_167185.1.fasta','NT_167196.1.fasta')]
 
 	# Values in column D12 for rows for which values in column D25 > 0.95
-	data = [r['D12'] for r in data if r['D25'] > 0.95]
+	result = [r['D12'] for r in data if r['D25'] > 0.95]
 ```
 
 #### reader.py:
