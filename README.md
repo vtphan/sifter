@@ -4,17 +4,14 @@ Token is a tab by default, but configurable to others, e.g. comma or semicolon.
 #### matreader.py:
 
 ```
-	# read a tab-separate file.
-	data = read("data.txt")   
-
-	print data['D12']	# This is the list of data in column 'D12'.
-	print [row['D12'] for row in data]   # same as above
+	data = read("data.txt")                           # Read a tab-separate file.
+	print data['D12']                                 # This is the list of data in column 'D12'.
+	print [row['D12'] for row in data]                # same as above
 
 	data = read("data.txt", sep=',', skip_header=5)   # Read a comma-separated file, skip 5 lines in the beginning of file
 
 	
-	# first column stores row keys, some of which can be filtered out (ignored)
-	filtered_data = data.ignore('NT_167185.1.fasta','NT_167196.1.fasta')
+	filtered_data = data.ignore('NT_167185.1.fasta','NT_167196.1.fasta')   # Filtered out some rows
 	print filtered_data['D12']
 ```
 
