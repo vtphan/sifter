@@ -23,7 +23,7 @@ Read a tab-separated file, skip 3 lines in the beginning of file
 	some_data = read("data.txt", sep='\t', skip_header=3)   
 ```
 
-### Selecting all rows and only rows satisfied specified conditions on column(s)
+### Selecting all rows 
 
 Short cut to getting a list of all values in column "state"
 ```
@@ -34,6 +34,8 @@ A more expressive way of getting a list of all values in column "state"
 ```
 	states = [ r['state'] for r in crime_data ]
 ```
+
+### Selecting rows satisfied specified conditions on column(s)
 
 Get of all values in column "state" where values in column "murder" (of the same rows) are higher than 5.0
 ```
