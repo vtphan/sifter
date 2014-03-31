@@ -20,7 +20,7 @@ Read in a comma-separated text file
 Read a tab-separated file, skip 3 lines in the beginning of file
 
 ```
-	some_data = read("data.txt", '\t', skip_header=3)   
+	some_data = read("data.tsv", '\t', skip_header=3)   
 ```
 
 ### Selecting all rows 
