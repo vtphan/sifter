@@ -1,4 +1,0 @@
-FIRSTNAME	LASTNAME	COMPANY	CITY	AGE
-John	Stevens	Toyota	New York	25
-Jack	Smith	Honda	Memphis	40
-Mary	Edwards	GM	San Francisco	19
