@@ -1,6 +1,11 @@
 rows.py parses a delimited text files into "rows".  Delimited text files can be comma-separated
 or tab-separated files.
 
+Delimited files must have a well-defined format, where the first row must specify names of all columns.
+There must be no missing values.
+
+You can select rows based on desirable contions on columns.
+
 
 ### Reading delimited text files
 
