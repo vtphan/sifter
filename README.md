@@ -9,7 +9,7 @@ Read in a comma-separated text file
 ```
 	import rows
 
-	crime_data = read("crimeRatesByState2005.csv", ',')
+	crime_data = rows.read("crimeRatesByState2005.csv", ',')
 ```
 
 Read a tab-separated file, skip 3 lines in the beginning of file
@@ -33,4 +33,9 @@ A more expressive way of getting a list of all values in column "state"
 Get of all values in column "state" where values in column "murder" (of the same rows) are higher than 5.0
 ```
 	states = [ r['state'] for r in crime_data if r['murder'] > 5.0 ]
+```
+
+A list of states with murder rate < 3.0 and rate robbery < 100.0
+```
+	states = [ (r['state'],r['murder'],r['robbery']) for r in crime_data if r['murder'] < 3.0 and r['robbery'] < 100.0 ]
 ```
