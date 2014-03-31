@@ -20,7 +20,17 @@ Read a tab-separated file, skip 3 lines in the beginning of file
 
 ### Getting specific column(s)
 
-All values in column "state"
+Short cut to getting a list of all values in column "state"
 ```
 	states = crime_data['state']
+```
+
+A more expressive way of getting a list of all values in column "state"
+```
+	states = [ r['state'] for r in crime_data ]
+```
+
+Get of all values in column "state" where values in column "murder" (of the same rows) are higher than 5.0
+```
+	states = [ r['state'] for r in crime_data if r['murder'] > 5.0 ]
 ```
