@@ -23,7 +23,7 @@ Read a tab-separated file, skip 3 lines in the beginning of file
 	some_data = read("data.txt", sep='\t', skip_header=3)   
 ```
 
-### Getting specific column(s)
+### Selecting all rows and only rows satisfied specified conditions on column(s)
 
 Short cut to getting a list of all values in column "state"
 ```
