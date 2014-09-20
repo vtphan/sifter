@@ -20,10 +20,10 @@ Read in a comma-separated text file
 Read a tab-separated file, skip 3 lines in the beginning of file
 
 ```
-	some_data = read("data.tsv", '\t', skip_header=3)   
+	some_data = read("data.tsv", '\t', skip_header=3)
 ```
 
-### Selecting all rows 
+### Selecting all rows
 
 Short cut to getting a list of all values in column "state"
 ```
@@ -46,3 +46,11 @@ A list of states with murder rate < 3.0 and rate robbery < 100.0
 ```
 	states = [ (r['state'],r['murder'],r['robbery']) for r in crime_data if r['murder'] < 3.0 and r['robbery'] < 100.0 ]
 ```
+
+Group data by column values
+```
+   groups = crime_data.group_by('politics')
+   all( r['murder'] > 1.0 for r in groups['Red'] )
+   any( r['murder'] > 8.0 for r in groups['Red'] )
+```
+
