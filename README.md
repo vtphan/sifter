@@ -13,7 +13,7 @@ Read in a comma-separated text file
 ```
 	import sifter
 
-	crime_data = rows.read("crimeRatesByState2005.csv", ',')
+	crime_data = sifter.read("crimeRatesByState2005.csv", ',')
 ```
 
 Read a tab-separated file, skip 3 lines in the beginning of file
