@@ -1,21 +1,20 @@
 '''
 Author: Vinhthuy Phan, 2014
 '''
+import csv
 
 #-----------------------------------------------------------------------------
-class Row:
-   def __init__(self, keys, values, sep):
-      ks = [ i.strip() for i in keys.split(sep) ]
-      vs = [ i.strip() for i in values.split(sep) ]
-      if len(ks) != len(vs):
+class Row(object):
+   def __init__(self, keys, values):
+      if len(keys) != len(values):
          raise Exception("Discrepancies in keys and values:\n%s\n%s\n" % (keys, values))
 
       self.data = {}
-      for i, k in enumerate(ks):
+      for i, k in enumerate(keys):
          try:
-            self.data[k] = float(vs[i])
+            self.data[k] = float(values[i])
          except:
-            self.data[k] = vs[i]
+            self.data[k] = values[i]
 
    def __getitem__(self, key):
       if key in self.data:
@@ -24,11 +23,10 @@ class Row:
 
 
 #-----------------------------------------------------------------------------
-class Rows:
-   def __init__(self, header, lines, sep):
-      self.rows = [ Row(header, line, sep) for line in lines ]
-      self.keys = [ line.split(sep)[0].strip() for line in lines ]
-      self.sep = sep
+class Rows(object):
+   def __init__(self, header, rows):
+      self.rows = [ Row(header, r) for r in rows ]
+      self.keys = [ r[0] for r in rows ]
       self.header = header
 
    def __len__(self):
@@ -48,7 +46,7 @@ class Rows:
    def ignore(self, *val):
       try:
          idx = set([ self.keys.index(v) for v in val ])
-         n = Rows(self.header, [], self.sep)
+         n = Rows(self.header, [])
          n.rows = [ self.rows[i] for i in range(len(self.rows)) if i not in idx ]
          n.keys = [ self.keys[i] for i in range(len(self.keys)) if i not in idx ]
          return n
@@ -63,14 +61,15 @@ class Rows:
 
 def read(filename, sep='\t', skip_header=0):
    ''' Default setting assumes the file is tab-delimited '''
+   rows = []
    with open(filename, 'rU') as f:
-      lines = [ line.strip() for line in f.readlines() ]
-      lines = lines[skip_header : ]
-      # remove empty lines and comments (lines starting with #) in data
-      lines = [ line for line in lines if line and line[0]!='#']
-
-   header = lines.pop(0).strip()
-   return Rows(header, lines, sep)
+      reader = csv.reader(f, delimiter=sep)
+      for row in reader:
+         if skip_header > 0:
+            skip_header -= 1
+         elif row and row[0][0] != '#':
+            rows.append(row)
+   return Rows(rows.pop(0), rows)
 
 #-----------------------------------------------------------------------------
 
