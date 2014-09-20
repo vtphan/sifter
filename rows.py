@@ -49,7 +49,7 @@ class Rows(object):
          raise StopIteration
 
    ''' return a dict keyed by values of "col" '''
-   def cluster(self, col):
+   def group_by(self, col):
       if col not in self.header:
          return None
       c = {}
